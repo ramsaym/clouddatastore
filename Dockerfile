@@ -26,6 +26,8 @@ COPY requirements.txt ./
 # Install dependencies.
 RUN pip install -r requirements.txt
 
+RUN pip3 install google-api-python-client
+
 # Copy local code to the container image.
 COPY . ./
 
