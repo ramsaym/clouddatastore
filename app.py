@@ -57,7 +57,7 @@ def hello() -> str:
     return "Hello, World! Hello Moon, Hellow Jupiter..."
 
 
-def inference()->
+def inference() -> str:
     response_inference = json.loads(
         requests.post(
             "https://api.modelplace.ai/v3/process",
