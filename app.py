@@ -27,6 +27,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+import json
+import time
+import requests
+
+
+
 import signal
 import sys
 from types import FrameType
@@ -47,6 +54,28 @@ def hello() -> str:
     logger.info("Child logger with trace Id.")
 
     return "Hello, World! Hello Moon, Hellow Jupiter..."
+
+    response_inference = json.loads(
+        requests.post(
+            "https://api.modelplace.ai/v3/process",
+            params={"model_id": "51",},
+            files={"upload_data": open("<PATH TO THE IMAGE>", "rb"),},
+        ).content
+    )
+
+    print("Waiting for completion", end="")
+    while True:
+        response_task = json.loads(
+            requests.get(
+                "https://api.modelplace.ai/v3/task", params=response_inference
+            ).content
+        )
+        if response_task["status"] != "finished":
+            print(end=".")
+            time.sleep(5)
+        else:
+            print("\n" + str(response_task["result"]))
+            exit(0)
 
 
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
