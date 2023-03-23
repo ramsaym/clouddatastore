@@ -66,7 +66,7 @@ def inference() -> str:
         ).content
     )
 
-    print("Waiting for completion", end="")
+    logger.info("Waiting for completion", end="")
     while True:
         response_task = json.loads(
             requests.get(
@@ -78,7 +78,6 @@ def inference() -> str:
             time.sleep(5)
         else:
             print("\n" + str(response_task["result"]))
-            return "not finished..."
 
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
     logger.info(f"Caught Signal {signal.strsignal(signal_int)}")
