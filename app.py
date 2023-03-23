@@ -53,7 +53,7 @@ def hello() -> str:
     # https://cloud.google.com/run/docs/logging#correlate-logs
     logger.info("Child logger with trace Id.")
 
-    #inference()
+    inference()
     return "Hello, World! Hello Moon, Hellow Jupiter..."
 
 
@@ -62,7 +62,7 @@ def inference() -> str:
         requests.post(
             "https://api.modelplace.ai/v3/process",
             params={"model_id": "49",},
-            files={"upload_data": open("<PATH TO THE IMAGE>", "rb"),},
+            files={"upload_data": open("images/G0042800.JPG", "rb"),},
         ).content
     )
 
