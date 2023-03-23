@@ -53,8 +53,8 @@ def hello() -> str:
     # https://cloud.google.com/run/docs/logging#correlate-logs
     logger.info("Child logger with trace Id.")
 
-    inference()
-    return "Hello, World! Hello Moon, Hellow Jupiter..."
+    test = inference()
+    return test + "Hello, World! Hello Moon, Hellow Jupiter..."
 
 
 def inference() -> str:
@@ -78,7 +78,7 @@ def inference() -> str:
             time.sleep(5)
         else:
             print("\n" + str(response_task["result"]))
-            return "not finished"
+            return "not finished..."
 
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
     logger.info(f"Caught Signal {signal.strsignal(signal_int)}")
