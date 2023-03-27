@@ -24,9 +24,9 @@ WORKDIR /usr/src/app
 COPY requirements.txt ./
 
 RUN apt-get update && apt-get install -y python3-opencv
-RUN pip install ndg-httpsclient
-RUN pip install pyopenssl
-RUN pip install pyasn1
+#RUN pip install ndg-httpsclient
+#RUN pip install pyopenssl
+#RUN pip install pyasn1
 
 # Install dependencies.
 RUN pip install -r requirements.txt
