@@ -55,23 +55,15 @@ def hello() -> str:
     logger.info("Child logger with trace Id.")
 
     #test = inference()
-    return "Hello, World! Hello Moon, Hellow Jupiter..."
-
-
-def inference() -> str:
-
     rf = Roboflow(api_key="vdTY5BC9kvVQMW8GhQif")
     project = rf.workspace().project("qapotatoflow-trainingimagepool")
     model = project.version(2).model
 
 # infer on a local image
-    print(model.predict("images/G0042800.JPG", confidence=40, overlap=30).json())
+    #print(model.predict("images/G0042800.JPG", confidence=40, overlap=30).json())
 
-# visualize your prediction
-# model.predict("your_image.jpg", confidence=40, overlap=30).save("prediction.jpg")
+    return model.predict("images/G0042800.JPG", hosted=True, confidence=40, overlap=30).json()
 
-# infer on an image hosted elsewhere
-# print(model.predict("URL_OF_YOUR_IMAGE", hosted=True, confidence=40, overlap=30).json())
 
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
     logger.info(f"Caught Signal {signal.strsignal(signal_int)}")
