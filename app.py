@@ -41,7 +41,7 @@ from types import FrameType
 from flask import Flask
 
 from utils.logging import logger
-
+from roboflow import Roboflow
 
 app = Flask(__name__)
 
@@ -54,31 +54,24 @@ def hello() -> str:
     # https://cloud.google.com/run/docs/logging#correlate-logs
     logger.info("Child logger with trace Id.")
 
-    test = inference()
-    return test + "Hello, World! Hello Moon, Hellow Jupiter..."
+    #test = inference()
+    return "Hello, World! Hello Moon, Hellow Jupiter..."
 
 
 def inference() -> str:
-    response_inference = json.loads(
-        requests.post(
-            "https://api.modelplace.ai/v3/process",
-            params={"model_id": "49",},
-            files={"upload_data": open("images/G0042800.JPG", "rb"),},
-        ).content
-    )
 
-    logger.info("Waiting for completion", end="")
-    while True:
-        response_task = json.loads(
-            requests.get(
-                "https://api.modelplace.ai/v3/task", params=response_inference
-            ).content
-        )
-        if response_task["status"] != "finished":
-            print(end=".")
-            time.sleep(5)
-        else:
-            print("\n" + str(response_task["result"]))
+    rf = Roboflow(api_key="vdTY5BC9kvVQMW8GhQif")
+    project = rf.workspace().project("qapotatoflow-trainingimagepool")
+    model = project.version(2).model
+
+# infer on a local image
+    print(model.predict("images/G0042800.JPG", confidence=40, overlap=30).json())
+
+# visualize your prediction
+# model.predict("your_image.jpg", confidence=40, overlap=30).save("prediction.jpg")
+
+# infer on an image hosted elsewhere
+# print(model.predict("URL_OF_YOUR_IMAGE", hosted=True, confidence=40, overlap=30).json())
 
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
     logger.info(f"Caught Signal {signal.strsignal(signal_int)}")
