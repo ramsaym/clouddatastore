@@ -23,7 +23,7 @@ WORKDIR /usr/src/app
 # Copying this separately prevents re-running pip install on every code change.
 COPY requirements.txt ./
 
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+RUN pip3 install opencv-python-headless==4.5.3.56
 
 # Install dependencies.
 RUN pip install -r requirements.txt
