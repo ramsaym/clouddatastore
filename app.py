@@ -55,12 +55,12 @@ def hello() -> str:
     logger.info("Child logger with trace Id.")
 
     #test = inference()
-    rf = Roboflow(api_key="vdTY5BC9kvVQMW8GhQif")
-    project = rf.workspace().project("qapotatoflow-trainingimagepool")
-    model = project.version(2).model
+    #rf = Roboflow(api_key="vdTY5BC9kvVQMW8GhQif")
+    #project = rf.workspace().project("qapotatoflow-trainingimagepool")
+    #model = project.version(2).model
 
 # infer on a local image
-    print(model.predict("images/G0042800.JPG", confidence=40, overlap=30).json())
+    #print(model.predict("images/G0042800.JPG", confidence=40, overlap=30).json())
 
     return render_template('index.html')
 
