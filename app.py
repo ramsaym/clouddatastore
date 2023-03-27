@@ -60,9 +60,9 @@ def hello() -> str:
     model = project.version(2).model
 
 # infer on a local image
-    #print(model.predict("images/G0042800.JPG", confidence=40, overlap=30).json())
+    print(model.predict("images/G0042800.JPG", confidence=40, overlap=30).json())
 
-    return model.predict("images/G0042800.JPG",confidence=40, overlap=30).json()
+    return "Success.."
 
 
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
