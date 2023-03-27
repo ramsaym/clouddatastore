@@ -42,6 +42,7 @@ from flask import Flask
 
 from utils.logging import logger
 
+
 app = Flask(__name__)
 
 
