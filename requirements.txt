@@ -6,3 +6,4 @@ structlog==22.1.0
 
 google-auth==2.3.2
 google-api-python-client==2.65.0
+roboflow
